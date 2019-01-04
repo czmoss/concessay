@@ -1,1 +1,4 @@
 go/sieve/sieve
+
+bin/
+obj/
