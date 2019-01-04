@@ -15,14 +15,22 @@ class Program {
 		}
 	}
 
-	static void Main(string[] args) {
+	static IEnumerable<int> Sieve() {
 		var ns = Generate();
-		for (var i = 0; i < 100; i++) {
+		for (;;) {
 			var nse = ns.GetEnumerator();
 			nse.MoveNext();
 			var p = nse.Current;
-			System.Console.Out.WriteLine(p);
+			yield return p;
 			ns = Filter(ns, p);
+		}
+	}
+
+	static void Main(string[] args) {
+		var primes = Sieve().GetEnumerator();
+		for (var i = 0; i < 100; i++) {
+			primes.MoveNext();
+			System.Console.Out.WriteLine(primes.Current);
 		}
 	}
 }
